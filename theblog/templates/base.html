@@ -1,0 +1,158 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}"> this loads and adds css links -->
+    <title>
+        {% block title %}
+        {% comment %} MUMI {% endcomment %}
+        LOPT INC
+        {% endblock %}
+    </title>
+    <link rel="icon" type="image/x-icon" href="{% static 'theblog/images/favicon.ico'%}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css'%}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  </head>
+  <body>
+    {% comment %} data-bs-theme="light" {% endcomment %}
+    <nav class="navbar sticky-top navbar-dark" style="background: #120032;">
+        <div class="container" >
+          <a class="navbar-brand" href="{% url 'home' %}">
+            {% load static %}
+            {% comment %} <img src="{% static 'img/glogo.png' %}" alt="MUMI" > {% endcomment %}
+            LOPT
+          </a>
+          <ul class="nav" >
+{% comment %} if the user is loggedin the app then the following will appear {% endcomment %}
+            {% if user.is_authenticated %}
+            {% comment %} <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+            </li> {% endcomment %}
+
+            {% comment %} this if checks for is the user has set their profile, if not it shows only create profile tab instead of Create Post {% endcomment %}
+            {% if user.profile.id %}
+            <li class="nav-item" >
+              <a class="nav-link" aria-current="page" href="{% url 'add_post' %}" style="color:#F5F5F5;">Create Post</a>
+            </li>  
+            {% else %}
+            <li class="nav-item" >
+              <a class="nav-link" aria-current="page" href="{% url 'create_profile_page' %}" style="color:#F5F5F5;">Create Profile</a>
+            </li> 
+            {% endif %}
+           
+            {% comment %} <li class="nav-item">
+              <a class="nav-link"  href="{% url 'edit_profile' %}">Profile</a>
+            </li> {% endcomment %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#F5F5F5;">
+                Settings
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'home' %}">Home</a></li>
+                {% comment %} <li><a class="dropdown-item" href="{% url 'edit_profile' user.profile.id %}">Account</a></li> {% endcomment %}
+                <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Account</a></li>
+                {% if  user.profile.id %} {% comment %} this checks if the user profile has been created and if not, only the button for create user profile shows on the nave bar. {% endcomment %}
+                <li><a class="dropdown-item" href="{% url 'show_profile_page' user.profile.id %}">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %} ">Edit Profile</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'create_profile_page'%}">Create Profile Page</a></li>
+                {% endif %}
+                 {% comment %} <li><a class="dropdown-item" href="#">Change Password</a></li> {% endcomment %}
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+              </ul>
+            </li>
+            
+            {% comment %} <li class="nav-item">
+              <span class="nav-link" style="color:white;"> Welcome {{ user.username }}</span>
+            </li>
+            {% endcomment %}
+            
+            {% comment %} <li class="nav-item">
+              <span class="nav-link" style="color:white;"> 
+                 
+                <span id="hours">00</span>
+                <span > : </span>
+                <span id="minutes">00</span>
+                <span> : </span>
+                <span id="seconds">00</span>
+                <span id="session">AM</span>
+              
+              </span>
+              <script>
+               function displayTime(){
+                var dateTime = new Date();
+                var hrs = dateTime.getHours();
+                var min = dateTime.getMinutes();
+                var sec = dateTime.getSeconds();
+                var session = document.getElementById('session');
+
+                  if(hrs >= 12){
+                    session.innerHTML = 'PM';
+                  }else{
+                    session.innerHTML = 'AM';
+                  }
+
+                  if(hrs > 12){
+                    hrs = hrs -12;
+                  }
+                document.getElementById('hours').innerHTML =hrs;
+                document.getElementById('minutes').innerHTML = min;
+                document.getElementById('seconds').innerHTML = sec;
+               }
+               setInterval(displayTime,10);
+              </script>
+            </li> {% endcomment %}
+
+            {% else %}
+{% comment %} when user aint loged in  {% endcomment %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}" style="color:#F5F5F5;">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}" style="color:#F5F5F5;">Log In</a>
+            </li>
+
+            {% endif %}
+            
+          
+         
+           </ul>
+
+          
+        </div>
+      </nav>
+    <br>
+    
+   
+
+    <div class="container" style="text-align: justify;">
+      <br>
+
+      {% if messages %}
+        {% for messages in messages %}
+        {{ messages }}
+        {% endfor %}
+      {% endif %}
+    {% block content %}
+
+    {% endblock %}
+</div>
+<script>
+  setTimeout(function(){
+    if($('#msg').length > 0){
+      $('#msg').remove();
+    }
+  }, 3000)
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+</body>
+</html>

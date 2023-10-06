@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+
+<h2>About {{page_user.user.first_name}}</h2>
+
+
+
+</br>
+<div class="card mb-3" >
+    <div id="#" class="row g-0">
+        <div id="#" class="col-md-2">
+            <center>
+                {% if page_user.profile_pic %}
+                <img  src="{{ page_user.profile_pic.url }}" class="img-fluid rounded-start" alt="author dp">
+              {% else %} 
+              {% comment %} static/theblog/images/default_profile.png {% endcomment %}
+                 <img src="{% static 'static/theblog/images/default_profile.png' %}" class="img-fluid rounded-start" alt="author dp"> 
+              {% endif %}</center>
+              <div class="caption">
+                <center>
+                     <a href="#"> 
+                         <h4><small>{{ page_user.user.first_name}}</small> </br><small>{{page_user.user.last_name}}</small> </br>{{page_user.user.username}}</h4>
+                     </a>
+             </center>
+               </div>
+        </div>
+        
+      <div class="col-md-10">
+        <div class="card-body">
+            <div class="card-header">
+                <h5 class="card-title">{{page_user.user.first_name }} {{page_user.user.last_name}} </h5>
+                <small> {{ page_user }}</small> 
+              </div>
+          
+                <p class="small text-muted">
+                {% comment %} if a user doesnt have a specific link, to control that exception, we need to use an if statement {% endcomment %}
+               
+                {% if page_user.twitter_url %}     {% comment %} for if user profile has a twitter linke, then open it {% endcomment %}
+                        <a href="{{ page_user.twitter_url }}" style="text-decoration:none;">Twitter</a> | 
+                    {% endif %}
+                    
+                    {% if page_user.linkedin_url %}
+                        <a href="{{ page_user.linkedin_url }}" style="text-decoration:none;">LinkedIn</a>  | 
+                    {% endif %}
+                    {% if page_user.facebook_url %}
+                        <a href="{{ page_user.facebook_url }}" style="text-decoration:none;">Facebook</a> | 
+                    {% endif %}
+                    {% if page_user.website_url %}
+                        <a href="{{ page_user.website_url }}" style="text-decoration:none;">Website</a> | 
+                    {% endif %}
+                    {% if page_user.github_url %}
+                        <a href="{{ page_user.github_url }}" style="text-decoration:none;">Github</a> | 
+                    {% endif %}
+                    {% if page_user.youtube_url %}
+                        <a href="{{ page_user.youtube_url }}" style="text-decoration:none;">Youtube</a> 
+                    {% endif %}
+                    {% comment %} {% if page_user.tiktok_url %}
+                <a href="{{ page_user.tiktok_url }}" style="text-decoration:none;"> Tk</a>
+                  {% endif %} {% endcomment %}
+                </p>
+                <p class="card-text">{{ page_user.bio }}</p>
+                <p class="card-text">
+                    <small class="card-footer text-body-secondary">
+                        <small> Campus: {{page_user.campus_name }}</small>
+                        Joined <small>{{user.date_joined}} </small>
+                    </small>
+                </p>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% comment %} load static tells the program that we will be using some static files {% endcomment %}
+{% load static %} 
+{% block title %}{{ post.title}}{% endblock%}
+
+
+    {% block content %}
+    {% comment %} Current User: {{ user.id}}
+    Post  author: {{ post.author.id}} {% endcomment %}
+    {% comment %} 829AC3 {% endcomment %}
+        <h3 style="text-decoration: none; Color:#ccccc;" > 
+            <a href="{% url 'home' %}"> <i class="bi bi-arrow-left-circle" style="color:#120032; size:22px; clickable:True;"></i></a>
+            {{ post.title}}
+        </h3>
+        <small>
+            {{ post.title_tag }} 
+            {% comment %} {{post.author.username}} |  {% endcomment %}
+        
+           <span class="p-3 text-primary"> Posted on: </span> {{  post.post_date }}   <span class="p-3 text-warning"> Dead Line: </span> {{ post.dead_line }}
+            {% comment %} This first if checks for if the user is logined {% endcomment %}
+            {% if user.is_authenticated %} 
+                {% comment %} This 2nd if checks for if the person logged in was the one who posted the opp, then they can edit or delete it. {% endcomment %}
+                {% if user.id == post.author.id %}
+             - <a href="{% url 'update_post' post.pk %}">
+                <small>Edit</small></a>
+                {% comment %} this is for edit
+                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/wloilxuq.json"
+                            trigger="hover"
+                            colors="primary:#120032,secondary:#f5f5f5"
+                            stroke="60"
+                            style="width:250px;height:250px">
+                        </lord-icon>
+                {% endcomment %}
+                 </small> | <a class="text-decoration-none" href="{% url 'delete_post' post.pk %}"><small>      Delete</small></a><br>
+                 {% endif%}
+        {% endif %}
+        <hr>
+        <br>
+    Link: <a href="{{post.title_link}}" class="text-decoration-none" target="_self" style="text-decoration: none; Color:#829AC3;"> {{post.title_link}}</a><br></br>
+    {% comment %} <a href="{% url post.title_link %}"> {{post.title_link}}</a></br> {% endcomment %}
+     
+    {% comment %} If the post has an image then load it if not, also load the other details {% endcomment %}
+    {% if post.header_image %}
+    <img style="max-width:100%;"  src="{{ post.header_image.url}}"><br><br>
+                 {% endif%}
+    {{post.body | safe }}
+ 
+    <br>
+    {% comment %} <br>
+    <a href="{% url 'home' %}" class="btn btn-secondary fw-light">Back</a>
+                </br>
+            </br>
+            <hr> {% endcomment %}
+{% if user.is_authenticated %}
+            <form action="{% url 'like_post' post.pk %}" method="POST">
+                {% csrf_token %}
+                {% if liked %}
+                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-transparent btn-small">
+                    <lord-icon
+                    src="https://cdn.lordicon.com/hrqwmuhr.json"
+                    trigger="hover"
+                    stroke="80"
+                    colors="primary:#121331,secondary:#08a88a"
+                    style="width:50px;height:50px">
+            </lord-icon>  
+            Unlike
+                    
+                </button>
+               
+                {% comment %} <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-danger btn-small"><i class="bi bi-hand-thumbs-down"></i></button> {% endcomment %}
+                {% else %}
+                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                    <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-transparent btn-small" style="border:1px solid; border-radius:90px; color:#120032;">
+                        <lord-icon 
+                        src="https://cdn.lordicon.com/jvihlqtw.json"
+                        trigger="hover"
+                        stroke="80"
+                        colors="primary:#110a5c,secondary:#0008ff"
+                        style="width:50px;height:50px">
+                    </lord-icon> 
+                    Like 
+                        {% comment %} <lord-icon
+                            src="https://cdn.lordicon.com/hrqwmuhr.json"
+                            trigger="hover"
+                            colors="primary:#121331,secondary:#08a88a"
+                            style="width:50px;height:50px">
+                    </lord-icon> {% endcomment %}
+                </button>
+                {% comment %} <button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-primary btn-small"><i class="bi bi-hand-thumbs-up"></i></button> {% endcomment %}
+                {% endif %}
+      {% else %}
+     <a href="{% url 'login' %}">LogIn</a> <small> to Like:- </small> 
+     {% endif %}
+
+    Total Likes :- {{ total_likes }}
+     <br>
+    </form>
+</br>
+{% comment %} About the Author : {% endcomment %}
+</br>
+{% comment %} <h5 class="card-title">{{post.author.first_name }} {{post.author.last_name}} </h5> {% endcomment %}
+
+<div class="card mb-3" >
+    <div id="wrapper" class="row g-0">
+     {% comment %} <div id="image" class="col-md-2">
+            {% if post.author.profile.profile_pic %}
+             <center> <img  src="{{ post.author.profile.profile_pic.url }}" class="rounded-circle radius-sm" width="45%"  alt="author dp" style="margin-top:25%;"></center>
+            {% else %} 
+               <center><img src="{% static 'theblog/images/default3.png'%}" class="rounded-circle radius-sm" width="45%"  alt="author dp" style="margin-top:25%;"></center> 
+            {% endif %}
+            <div class="caption">
+               <center>
+                    <a href="{% url 'show_profile_page' post.author.profile.id %}"> </a>
+            </center>
+              </div>
+           
+        </div> {% endcomment %}
+        
+      <div class="col-md-12">
+        <div class="card-body">
+            <div class="card-header">
+                <a href="{% url 'show_profile_page' post.author.profile.id %}" style="text-decoration: none; Color:#6C757D;"> 
+                    <h5 class="card-title">About the Author </h5></a>
+                    {% comment %} <h5 class="card-title">{{post.author.first_name }} {{post.author.last_name}} </h5></a> {% endcomment %}
+              </div>
+          {% comment %} small text-muted {% endcomment %}
+                <p class="">
+                Follow {{post.author.first_name}} on socials:
+                <span style="font-size:1.5em; letter-spacing:7px;">
+                {% if post.author.profile.twitter_url %}     
+                        <a href="{{ post.author.profile.twitter_url }}" style="text-decoration:none;"><i class="bi bi-twitter" style="color:#00acee;"></i></a>  
+                    {% endif %}
+                    
+                    {% if post.author.profile.linkedin_url %}
+                        <a href="{{ post.author.profile.linkedin_url }}" style="text-decoration:none;"><i class="bi bi-linkedin" style="color:#0072b1;"></i></a>
+                    {% endif %}
+                    {% if post.author.profile.facebook_url %}
+                        <a href="{{ post.author.profile.facebook_url }}" style="text-decoration:none;"><i class="bi bi-facebook" style="color:#4267B2;"></i></a>
+                    {% endif %}
+                    {% if post.author.profile.website_url %}
+                        <a href="{{ post.author.profile.website_url }}" style="text-decoration:none;"><i class="bi bi-globe2"></i></a>
+                    {% endif %}
+                    {% if post.author.profile.github_url %}
+                        <a href="{{ post.author.profile.github_url }}" style="text-decoration:none;"><i class="bi bi-github" style="color:#171515;"></i></a>
+                    {% endif %}
+                    {% if post.author.profile.youtube_url %}
+                        <a href="{{ post.author.profile.youtube_url }}" style="text-decoration:none;"><i class="bi bi-youtube" style="color:red;"></i></a> 
+                    {% endif %}
+                    {{ else }}
+                </span>
+                </p>
+                <p id="display_bio" class="card-text">{{post.author.first_name }} {{post.author.last_name}}</p>
+                {% comment %} <p id="display_bio" class="card-text">{{ post.author.profile.bio }}</p> {% endcomment %}
+                <p class="card-text"><small class="card-footer text-body-secondary"><small> Campus: {{post.author.profile.campus_name }}</small></small></p>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+{% comment %} <img src="{{ post.author.profile.profile_pic.url }}" width="100" height="100" class="rounded-circle" alt="author dp"/> {% endcomment %}
+    {% endblock %}

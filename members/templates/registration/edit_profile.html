@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}User Profile{% endblock%}
+
+{% comment %} {% include 'registration/messages.html' %} {% endcomment %}
+    {% block content %}
+   <center> <h1>User Profile</h1></center>
+    <br></br>
+    {% comment %} {{ user.profile.bio }} {% endcomment %}
+    <br></br>
+<div class="form-group">
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form.as_p }} <!-- the form.as.p, P means it will all start as a paragrahp like <p>, we could use, table, ul etc-->
+
+       <center> <button class="btn btn-primary">Save Changes</button></center>
+    </form>
+   
+</br>
+</div>
+<center> <a href="{% url 'home' %}">
+    <button class="btn btn-secondary mb-4" style="width:20%;">
+        Cancel
+    </button>
+</a></center>
+{% comment %} </br> {% endcomment %}
+    {% endblock%}

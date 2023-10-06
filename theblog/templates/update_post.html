@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Edit Posted{% endblock%}
+
+
+    {% block content %}
+        {% if user.is_authenticated %}
+             {% if user.id == post.author.id %}
+        <h1>Update Post</h1>
+        <br></br>
+
+<div class="form-group">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }} <!-- the form.as.p, P means it will all start as a paragrahp like <p>, we could use, table, ul etc-->
+
+        <button class="btn btn-primary">Update</button>
+{% comment %} shared-opportunity {% endcomment %}
+
+        <span class="p-3"> </span>
+        <a href="{% url 'home' %}" class="btn btn-secondary fw-light">Go back to Home</a>
+    </form>
+</div>
+{% else %}
+<p class="text-danger">
+Unauthorised Entry! You can Not to edit this post!! Because it's another users' post.</p>
+
+{% endif %}
+
+
+
+{% endif%}
+
+
+
+
+    {% endblock%}
+
+
+   
+
+

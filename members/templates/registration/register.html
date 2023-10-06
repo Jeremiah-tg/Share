@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock%}
+
+
+    {% block content %}
+    <h1>Register</h1>
+    <br></br>
+
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }} <!-- the form.as.p, P means it will all start as a paragrahp like <p>, we could use, table, ul etc-->
+
+       <center> <button class="btn btn-success">Register</button></center>
+    </form>
+</div>
+</br>
+    {% endblock%}

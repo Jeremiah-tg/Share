@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Post Opportunity{% endblock%}
+
+
+    {% block content %}
+        {% if user.is_authenticated %}
+         <h1>Share Opportunity</h1>
+         <br></br>
+
+<div class="form-group">
+    <form method="POST" enctype="multipart/form-data"> <!--enctype allows a form to accept images -->
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }} <!-- the form.as.p, P means it will all start as a paragrahp like <p>, we could use, table, ul etc-->
+
+        <button class="btn btn-primary">Post</button>
+        <span class="p-3"></span>
+        <a href="{% url 'home' %}" class="btn btn-secondary fw-light">Go back to Home</a>
+    </form>
+    <br>
+</div>
+
+<script>
+    var name = "{{ user.id }}";
+    document.getElementById("subscriber").value = name;
+</script>
+
+{% else %}
+
+You need to log in, to share the opportunity. Else, you register if you have no account.
+
+{% endif %}
+    {% endblock%}
+   
+ 
+
