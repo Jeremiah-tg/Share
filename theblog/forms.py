@@ -1,6 +1,7 @@
 from django import forms 
 from .models import Post
 
+
 # Styling the django framework forms with bootstrap
 # specify the fields, use widgets and call the fields specfing the data types and class
 class PostForm(forms.ModelForm):

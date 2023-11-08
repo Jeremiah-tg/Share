@@ -43,7 +43,10 @@
             {% else %}
             <li class="nav-item" >
               <a class="nav-link" aria-current="page" href="{% url 'create_profile_page' %}" style="color:#F5F5F5;">Create Profile</a>
-            </li> 
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link" aria-current="page" href="#" style="color:#F5F5F5;">Subscription Plans</a>
+            </li>  
             {% endif %}
            
             {% comment %} <li class="nav-item">
@@ -60,19 +63,24 @@
                 {% if  user.profile.id %} {% comment %} this checks if the user profile has been created and if not, only the button for create user profile shows on the nave bar. {% endcomment %}
                 <li><a class="dropdown-item" href="{% url 'show_profile_page' user.profile.id %}">Profile</a></li>
                 <li><a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %} ">Edit Profile</a></li>
+                <li><a class="dropdown-item" href="#">Subscription</a></li>
+                 
                 {% else %}
                 <li><a class="dropdown-item" href="{% url 'create_profile_page'%}">Create Profile Page</a></li>
+               
                 {% endif %}
                  {% comment %} <li><a class="dropdown-item" href="#">Change Password</a></li> {% endcomment %}
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
               </ul>
             </li>
-            
-            {% comment %} <li class="nav-item">
-              <span class="nav-link" style="color:white;"> Welcome {{ user.username }}</span>
+             
+           <li class="nav-item">
+              <span class="nav-link" style="color:white; "> {{ user.username }} </span>
+             {% comment %} <img src="{{ page_user.profile_pic.id }}" width="40px" height="45px" class="rounded-circle" alt="user"> {% endcomment %}
+              {% comment %} Welcome {{ user.username }} {% endcomment %}
             </li>
-            {% endcomment %}
+            
             
             {% comment %} <li class="nav-item">
               <span class="nav-link" style="color:white;"> 
