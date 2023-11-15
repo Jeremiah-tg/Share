@@ -27,6 +27,11 @@ class HomeView(ListView): #calling the list of database in a list
     template_name = "home.html"
     ordering =['-id'] #-id would order the post from the latest post, last post it is
 
+
+class CreateSubscriptionPageView(ListView):
+    model = Post
+    template_name="registration/create_subscription_page.html"   
+
 class ArticleDetailView(DetailView): #We need to create a detailed view of a clickable title of a post.
     model = Post
     template_name = "article_details.html"

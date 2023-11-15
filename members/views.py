@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.views import generic 
+from django.views import generic
 from django.views.generic import DetailView, CreateView
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
@@ -64,3 +64,14 @@ class UserEditView(generic.UpdateView):
 
     def get_object(self):
         return self.request.user
+
+    def subscribe(request):
+        if request.method == 'POST':
+            email = request.POST['email']
+            if not Subscribe.objects.filter(email=email).exists():
+                subscribe = Subscribe(email=email)
+                subscribe.save()
+                messages.success(request, 'You have successfully subscribed to our newsletter')
+            else:
+                messages.error(request, 'You are already subscribed to our newsletter')
+        return redirect('home')
