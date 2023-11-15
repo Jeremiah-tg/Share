@@ -30,7 +30,7 @@ class HomeView(ListView): #calling the list of database in a list
 
 class CreateSubscriptionPageView(ListView):
     model = Post
-    template_name="registration/create_subscription_page.html"   
+    template_name="create_subscription_page.html"   
 
 class ArticleDetailView(DetailView): #We need to create a detailed view of a clickable title of a post.
     model = Post

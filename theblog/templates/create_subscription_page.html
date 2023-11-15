@@ -1,26 +1,156 @@
+{% extends 'base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}"> this loads and adds css links -->
-    <title>
-        {% block title %}
-        {% comment %} MUMI {% endcomment %}
-        LOPT INC
-        {% endblock %}
-    </title>
-    <link rel="icon" type="image/x-icon" href="{% static 'theblog/images/favicon.ico'%}">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css'%}"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  </head>
-  <body>
-    <p> Contac us for Subscription plans here below...Make a request.</p>
+{% block content %}
 
-  </body>
-  </html>
+{% if user.is_authenticated %}
+    {% if user.id == user.profile.id %}
+  <link href="{% static 'css/pricing.css' %}" rel="stylesheet"> 
+     <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    
+
+
+<div class="container py-3">
+  <header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      {% comment %} <h1 class="display-4 fw-normal">Pricing</h1> {% endcomment %}
+      <p class="fs-5 text-muted">Make the most of LOPT with one of our Membership Plans suiting your need.
+        Save up to 20% when buying a plan on a quarterly basis.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Plus</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">12,000 UGX<small class="text-muted fw-light">/3mo</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Great for freelancers who are new to LOPT and want to multiply their chances.</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Select</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Intermediate</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">30,000 UGX<small class="text-muted fw-light">/3mo</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Designed for freelancers who have completed their first projects and want to continue growing.</li>
+            
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-primary">Select</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+          <div class="card-header py-3 text-white bg-primary border-primary">
+            <h4 class="my-0 fw-normal">Premium</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">50,000 UGX<small class="text-muted fw-light">/2mo</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Perfect for student/ graduates partime freelancers who want to make the most of LOPT.</li>
+            </ul>
+            <button type="button" class="w-100 btn btn-lg btn-primary">Select</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="display-6 text-center mb-4">Compare plans</h2>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check" viewBox="0 0 16 16">
+    <title>Check</title>
+    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+  </symbol>
+</svg>
+    <div class="table-responsive">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th style="width: 34%;"></th>
+            <th style="width: 22%;">Plus</th>
+            <th style="width: 22%;">Intermediate</th>
+            <th style="width: 22%;">Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="text-start">Weekly connects</th>
+            <td>Adds 3 connects</td>
+            <td>Adds 5 connects</td>
+            <td>Adds 12 connects</td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">Contact new projects</th>
+            <td>80 minutes after posting</td>
+            <td>40 minutes after posting</td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+          </tr>
+        </tbody>
+
+        <tbody>
+          <tr>
+            <th scope="row" class="text-start">Ongoing projects</th>
+            <td>2 ongoing projects</td>
+            <td>5 ongoing projects</td>
+            <td>10 ongoing projects</td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">New project notifications</th>
+            <td></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">premium customer service</th>
+            <td></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">Extra security</th>
+            <td></td>
+            <td></td>
+            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+
+
+      {% else %}
+      <p class="text-danger">You are not the right User to access this page <strong> {{ user.username }} </strong>.</p>
+      <a href="{% url 'home' %}" class="btn btn-secondary  fw-light">Access home Page</a>
+      {% endif %}
+
+    {% else%}
+    <p class="text-danger">You are not Logined in as a User to access this page.</p>
+    <a href="{% url 'home' %}" class="btn btn-secondary  fw-light">Access home Page</a>
+  {% endif %}
+{% endblock%}
