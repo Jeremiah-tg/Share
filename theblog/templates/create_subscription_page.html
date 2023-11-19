@@ -4,7 +4,6 @@
 
 {% if user.is_authenticated %}
     {% if user.id == user.profile.id %}
-  <link href="{% static 'css/pricing.css' %}" rel="stylesheet"> 
      <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -19,16 +18,20 @@
           font-size: 3.5rem;
         }
       }
+      #plusbtn:hover {
+      background-color:#120032;
+      color: white;
+}
     </style>
     
+<body>
 
-
-<div class="container py-3">
+<div class="containerw" style="width:100%;">
   <header>
-    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      {% comment %} <h1 class="display-4 fw-normal">Pricing</h1> {% endcomment %}
+    <div class="pricing-header p-4 pb-md-3 mx-auto text-center">
+      <h3 class="display-5 fw-normal">Pricing</h3>
       <p class="fs-5 text-muted">Make the most of LOPT with one of our Membership Plans suiting your need.
-        Save up to 20% when buying a plan on a quarterly basis.
+       <br> Save up to 20% when buying a plan on a quarterly basis.
       </p>
     </div>
   </header>
@@ -41,11 +44,11 @@
             <h4 class="my-0 fw-normal">Plus</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">12,000 UGX<small class="text-muted fw-light">/3mo</small></h1>
+            <h1 class="card-title pricing-card-title">15,000 UGX<small class="text-muted fw-light">/mo</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Great for freelancers who are new to LOPT and want to multiply their chances.</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Select</button>
+            <button type="button" class="w-100 btn btn-lg" id="plusbtn" style="background-color:transparent; border:1px solid #120032; color: #120032;">Select</button>
           </div>
         </div>
       </div>
@@ -55,32 +58,32 @@
             <h4 class="my-0 fw-normal">Intermediate</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">30,000 UGX<small class="text-muted fw-light">/3mo</small></h1>
+            <h1 class="card-title pricing-card-title">30,000 UGX<small class="text-muted fw-light">/mo</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Designed for freelancers who have completed their first projects and want to continue growing.</li>
             
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-primary">Select</button>
+            <button type="button" class="w-100 btn btn-lg" style="background-color:#120032; color: white;">Select</button>
           </div>
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-white bg-primary border-primary">
+        <div class="card mb-4 rounded-3 shadow-sm" style="border-color: #120032;">
+          <div class="card-header py-3 text-white" style="background-color: #120032;">
             <h4 class="my-0 fw-normal">Premium</h4>
           </div>
           <div class="card-body">
-            <h1 class="card-title pricing-card-title">50,000 UGX<small class="text-muted fw-light">/2mo</small></h1>
+            <h1 class="card-title pricing-card-title">55,000 UGX<small class="text-muted fw-light">/mo</small></h1>
             <ul class="list-unstyled mt-3 mb-4">
               <li>Perfect for student/ graduates partime freelancers who want to make the most of LOPT.</li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-primary">Select</button>
+            <button type="button" class="w-100 btn btn-lg" style="background-color:#120032; color: white;">Select</button>
           </div>
         </div>
       </div>
     </div>
 
-    <h2 class="display-6 text-center mb-4">Compare plans</h2>
+    <h2 class="display-6 text-center mb-4">Compare plans</h2><hr>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="check" viewBox="0 0 16 16">
     <title>Check</title>
@@ -153,4 +156,5 @@
     <p class="text-danger">You are not Logined in as a User to access this page.</p>
     <a href="{% url 'home' %}" class="btn btn-secondary  fw-light">Access home Page</a>
   {% endif %}
+  <hr>
 {% endblock%}
