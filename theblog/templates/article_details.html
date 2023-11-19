@@ -21,19 +21,10 @@
             {% if user.is_authenticated %} 
                 {% comment %} This 2nd if checks for if the person logged in was the one who posted the opp, then they can edit or delete it. {% endcomment %}
                 {% if user.id == post.author.id %}
-             - <a href="{% url 'update_post' post.pk %}">
+             - <a class="text-decoration-none"  href="{% url 'update_post' post.pk %}">
                 <small>Edit</small></a>
-                {% comment %} this is for edit
-                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                        <lord-icon
-                            src="https://cdn.lordicon.com/wloilxuq.json"
-                            trigger="hover"
-                            colors="primary:#120032,secondary:#f5f5f5"
-                            stroke="60"
-                            style="width:250px;height:250px">
-                        </lord-icon>
-                {% endcomment %}
-                 </small> | <a class="text-decoration-none" href="{% url 'delete_post' post.pk %}"><small>      Delete</small></a><br>
+                </small> | 
+                <a class="text-decoration-none" href="{% url 'delete_post' post.pk %}"><small>      Delete</small></a><br>
                  {% endif%}
         {% endif %}
         <hr>
